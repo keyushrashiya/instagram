@@ -1,0 +1,17 @@
+.hw-250{
+    height: 250px !important;
+    width: 250px !important;
+}
+.h-200p{
+    height: 200px;
+}
+.object-contain{
+    object-fit: contain;
+}
+.line-normal{
+    line-height: normal;
+} 
+.hw-40{
+    height: 40px;
+    width: 40px;
+}
