@@ -22,6 +22,7 @@ import Calendar from "../pages/Calendar";
 
 // Post
 import Post from "../pages/Post/Post";
+import ChatWeb from "../pages/Post/Chat";
 
 // Project
 import ProjectList from "../pages/Projects/ProjectList";
@@ -287,6 +288,7 @@ const authProtectedRoutes = [
   //Api Key
   { path: "/apps-api-key", component: <APIKey /> },
   { path: "/post", component: <Post /> },
+  { path: "/chat-web", component: <ChatWeb /> },
 
   //Crm
   { path: "/apps-crm-contacts", component: <CrmContacts /> },

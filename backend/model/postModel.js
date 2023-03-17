@@ -15,6 +15,7 @@ const postSchema = mongoose.Schema({
   comment_ctn: { type: Number, default: 0 },
   isArchive: { type: Boolean, default: false },
   isLike: { type: Boolean, default: false },
+  user: { type: Object },
 });
 
 const postModel = mongoose.model("post", postSchema);

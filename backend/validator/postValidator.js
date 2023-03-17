@@ -25,6 +25,7 @@ class postValidator {
     next();
   };
   static updatePostValidate = async (req, res, next) => {
+
     const { id } = req.params;
     const validateSchema = Joi.object().keys({
       url: Joi.string().empty().label("url"),

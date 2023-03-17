@@ -147,6 +147,13 @@ const Navdata = () => {
             stateVariables: isDashboard,
         },
         {
+            id: "Chat",
+            label: "Chat",
+            icon: "ri-dashboard-2-line",
+            link: "/chat-web",
+            stateVariables: isDashboard,
+        },
+        {
             id: "dashboard",
             label: "Dashboards",
             icon: "ri-dashboard-2-line",

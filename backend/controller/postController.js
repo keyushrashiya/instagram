@@ -6,12 +6,13 @@ import commentModel from "../model/commentModel.js";
 
 class postController {
   static createPost = async (req, res) => {
-    const { url, type, description } = req.body;
     
+    const { url, type, description } = req.body;
+
     const buffer = Buffer.from(url, "base64");
     const fileName = Date.now() + `${type == "image" ? ".jpg" : ".mp4"}`;
     const filePath = join(process.cwd(), "upload", "post", type, fileName);
-    
+
     fs.writeFileSync(filePath, buffer, (err) => {
       console.log("error ==>", err);
       return errorResponse(res, 400, "Something went wrong", err);
@@ -22,6 +23,7 @@ class postController {
         type: type,
         description: description,
         ref_id: req.user._id,
+        user: { name: req.user.username, email: req.user.email },
       });
       const result = await doc.save();
       return successResponse(res, 200, "post created successfully ", result);
@@ -67,6 +69,7 @@ class postController {
   };
 
   static updatePost = async (req, res) => {
+
     const { url, description } = req.body;
     const post = req.data;
     try {
@@ -101,11 +104,13 @@ class postController {
           { new: true }
         );
       }
+      
       const result = await postModel.findByIdAndUpdate(
         post._id,
         { $set: { description: description } },
         { new: true }
       );
+      
       return successResponse(res, 200, "post updated successfully", result);
     } catch (error) {
       console.log("error ==>", error);

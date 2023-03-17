@@ -301,7 +301,7 @@ const Chat = () => {
                       </div>
                     </div>
 
-                    <div className="chat-message-list">
+                    {/* <div className="chat-message-list">
                       <ul
                         className="list-unstyled chat-list chat-user-list users-list"
                         id="userList"
@@ -356,7 +356,7 @@ const Chat = () => {
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </div> */}
 
                     <div className="d-flex align-items-center px-4 mt-4 pt-2 mb-2">
                       <div className="flex-grow-1">
@@ -382,7 +382,7 @@ const Chat = () => {
                     </div>
 
                     <div className="chat-message-list">
-                      <ul
+                      {/* <ul
                         className="list-unstyled chat-list chat-user-list mb-0 users-list"
                         id="channelList"
                       >
@@ -415,7 +415,7 @@ const Chat = () => {
                             </li>
                           </React.Fragment>
                         ))}
-                      </ul>
+                      </ul> */}
                     </div>
                   </SimpleBar>
 

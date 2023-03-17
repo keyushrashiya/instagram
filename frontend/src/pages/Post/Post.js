@@ -423,6 +423,8 @@ const Post = () => {
                         <Col lg={4} md={6} key={key} className="mb-3">
                           <Card className="border">
                             <CardBody>
+                            <h4 className="text-capitalize">{item.user.name}
+                            </h4>
                               {item.type === "image" ? (
                                 <img
                                   alt="..."

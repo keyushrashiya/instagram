@@ -28,7 +28,7 @@ class userController {
         { userId: result._id },
         process.env.JWT_SECRET_KEY
       );
-      const link = `http://localhost:3000/api/user/verify/${token}`;
+      const link = `http://192.168.100.6:3000/api/user/verify/${token}`;
 
       let html = fs.readFileSync(
         join(process.cwd(), "views", "mail", "Verify_mail.html"),
