@@ -157,6 +157,7 @@ const Chat = () => {
           <ToastContainer autoClose={2000} limit={1} />
           <BreadCrumb title="Chat" pageTitle="chat" />
           <Row>
+          
             <Col md={3}>
               <Card>
                 <CardBody>
