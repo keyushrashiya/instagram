@@ -55,11 +55,11 @@ const ProfileDropdown = () => {
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu-end">
           <h6 className="dropdown-header">Welcome {userName}!</h6>
-          <Link to="/profile" className="dropdown-item">
+          {/* <Link to="/profile" className="dropdown-item">
             <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
             <span className="align-middle">Profile</span>
-          </Link>
-
+          </Link> */}
+{/* 
           <Link to="/apps-chat" className="dropdown-item">
             <i className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i>{" "}
             <span className="align-middle">Messages</span>
@@ -89,7 +89,7 @@ const ProfileDropdown = () => {
           <Link to="/auth-lockscreen-basic" className="dropdown-item">
             <i className="mdi mdi-lock text-muted fs-16 align-middle me-1"></i>{" "}
             <span className="align-middle">Lock screen</span>
-          </Link>
+          </Link> */}
           <Link to="/logout" className="dropdown-item">
             <i className="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>{" "}
             <span className="align-middle" data-key="t-logout">

@@ -346,7 +346,7 @@ const Post = () => {
       <div className="page-content">
         <Container fluid>
           <ToastContainer autoClose={2000} limit={1} />
-          <BreadCrumb title="Customers" pageTitle="Ecommerce" />
+          <BreadCrumb title="Home" pageTitle="home" />
           <Row>
             <Col xs={12}>
               <Card>
@@ -423,8 +423,9 @@ const Post = () => {
                         <Col lg={4} md={6} key={key} className="mb-3">
                           <Card className="border">
                             <CardBody>
-                            <h4 className="text-capitalize">{item.user.name}
-                            </h4>
+                              <h4 className="text-capitalize">
+                                {item.user.name}
+                              </h4>
                               {item.type === "image" ? (
                                 <img
                                   alt="..."

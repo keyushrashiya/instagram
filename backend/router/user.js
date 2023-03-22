@@ -12,6 +12,8 @@ route.post(
 );
 route.post("/login", userValidator.loginValidate, userController.loginUser);
 route.get("/verify/:token", userController.verifyUser);
+route.get("/", authenticationMiddleware, userController.getUserList);
+
 route.post(
   "/forgot-password",
   userValidator.forgotPassValidate,

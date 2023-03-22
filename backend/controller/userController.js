@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import transporter from "../config/nodeMailer.js";
 import fs, { unlinkSync } from "fs";
 import { join } from "path";
+import chatModel from "../model/chatModel.js";
 
 dotenv.config();
 
@@ -120,6 +121,24 @@ class userController {
     }
   };
 
+  static getUserList = async (req, res) => {
+    const pagination = {
+      page: req.query.page,
+      limit: req.query.limit,
+    };
+    try {
+      const result = await userModel
+        .find({ isVerify: true })
+        .select("-__v")
+        .limit(pagination.limit)
+        .skip(pagination.page * pagination.limit);
+      return successResponse(res, 200, "success", result);
+    } catch (error) {
+      console.log("error ==>", error);
+      return errorResponse(res, 400, "Something went wrong", error);
+    }
+  };
+
   static editUserUser = async (req, res) => {
     const { image } = req.body;
     const user = req.user;
@@ -160,22 +179,9 @@ class userController {
     }
   };
   static changePassUser = async (req, res) => {
-    const { password } = req.body;
-    const user = req.user;
     try {
-      const hashPassword = await bcrypt.hash(password, 10);
-      const result = await userModel.findByIdAndUpdate(user._id, {
-        $set: { password: hashPassword },
-      });
-      const afterResult = await userModel
-        .findById(result._id)
-        .select("-password");
-      return successResponse(
-        res,
-        200,
-        "Reset password successfully",
-        afterResult
-      );
+      const result = await userModel.find();
+      return successResponse(res, 200, "success", result);
     } catch (error) {
       console.log("error ==>", error);
       return errorResponse(res, 400, "Something went wrong", error);

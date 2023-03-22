@@ -20,6 +20,7 @@ export const postLogin = (data) => api.create(url.POST_LOGIN, data);
 export const postRegister = (data) => api.create(url.POST_REGISTER, data);
 
 export const getPost = () => api.get(url.POST_URL);
+export const getUser = () => api.get(url.GET_USER);
 export const getUserPost = () => api.get(url.POST_URL+'?isMy=true');
 export const getPostTypeFilter = (data) => api.get(url.POST_URL+'?type='+data);
 export const postPost = (data) => api.create(url.POST_URL, data);
@@ -31,3 +32,6 @@ export const postComment = (id, data) => api.create(url.POST_COMMENT+id, data);
 export const getComments = (data) => api.get(url.POST_COMMENT+data);
 export const commentDelete = (data) => api.delete(url.POST_COMMENT+data);
 export const likeComment = (data) => api.update(url.LIKE_COMMENT+data);
+
+export const getChat = (data) => api.get(url.GET_CHAT+data);
+export const deleteChatMessage = (data) => api.delete(url.DELETE_MESSAGE+data);

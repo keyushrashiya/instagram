@@ -1,39 +1,51 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDb from "./config/connectDb.js";
+import chatRoute from "./router/chat.js";
 import userRoute from "./router/user.js";
 import postRoute from "./router/post.js";
 import bodyParser from "body-parser";
 import cors from "cors";
-// import WebSocket, { WebSocketServer } from "ws";
+import http from "http";
+import { Server } from "socket.io";
+import chatModel from "./model/chatModel.js";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 const DATABASE_URL = process.env.DATABASE_URL;
-// const wss = new WebSocketServer({ port: 3002 });
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    method: ["GET", "POST"],
+  },
+});
 
-// wss.on("connection", (ws) => {
-//   console.log("connected webSocket");
-//   ws.on("message", (message) => {
-//     wss.clients.forEach((client) => {
-//       if (wss.clients !== ws && client.readyState === WebSocket.OPEN) {
-//         console.log(message instanceof Blob);
-//         client.send(message);
-//       }
-//     });
-//   });
-// });
+io.on("connection", (socket) => {
+  console.log(`User connected: ${socket.id}`);
 
-// wss.on("connection", (ws) => {
-//   ws.on("message", (message) => {
-//     wss.clients.forEach((client) => {
-//       if (client !== ws && client.readyState === WebSocket.OPEN) {
-//         client.send(message);
-//       }
-//     });
-//   });
-// });
+  socket.on("join_room", async (data) => {
+    socket.join(data);
+    console.log(`User: ${socket.id} , Room: ${data}`);
+  });
+
+  socket.on("send_message", async (data) => {
+    socket.to(data.room).emit("receive_message", data);
+    console.log("data", data);
+    const doc = new chatModel({
+      user: { userId: data.user.userId },
+      room: data.room,
+      message: data.message,
+      time: data.time,
+    });
+    await doc.save();
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`User Disconnected: ${socket.id}`);
+  });
+});
 
 // bodyParser
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -44,11 +56,12 @@ app.use(cors());
 // Route
 app.use("/api/user", userRoute);
 app.use("/api/post", postRoute);
+app.use("/api/chat", chatRoute);
 
 // Connect db
 connectDb(DATABASE_URL);
 
 // Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
